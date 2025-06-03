@@ -1,0 +1,88 @@
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أرشيف فيسبوك - نظام إدارة البيانات الشخصية</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles - Modular CSS -->
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/media.css">
+    <link rel="stylesheet" href="styles/modals.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/intelligence.css">
+    <link rel="stylesheet" href="styles/pdf.css">
+    <link rel="stylesheet" href="styles/print.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 rtl">
+    <!-- React App Mount Point -->
+    <div id="root"></div>
+
+    <!-- Component Scripts - Load in order -->
+    <script type="text/babel" src="components/Navigation.js"></script>
+    <script type="text/babel" src="components/FileUpload.js"></script>
+    <script type="text/babel" src="components/InfoItem.js"></script>
+    <script type="text/babel" src="components/MediaItem.js"></script>
+    <script type="text/babel" src="components/PostCard.js"></script>
+    <script type="text/babel" src="components/ProfileHeader.js"></script>
+    <script type="text/babel" src="components/ProfileInfo.js"></script>
+    <script type="text/babel" src="components/PostsSection.js"></script>
+    <script type="text/babel" src="components/DateUtils.js"></script>
+    <script type="text/babel" src="components/IntelligenceAnalyzer.js"></script>
+    <script type="text/babel" src="components/IntelligenceReport.js"></script>
+    <script type="text/babel" src="components/PDFExporter/ModalManager.js"></script>
+    <script type="text/babel" src="components/PDFExporter/PDFConfig.js"></script>
+    <script type="text/babel" src="components/PDFExporter/PDFUtils.js"></script>
+    <script type="text/babel" src="components/PDFExporter/PDFSections.js"></script>
+    <script type="text/babel" src="components/PDFExporter/PDFProcessor.js"></script>
+    <script type="text/babel" src="components/PDFExporter.js"></script>
+    <script type="text/babel" src="components/ApiKeyManager.js"></script>
+    <script type="text/babel" src="components/AccountInputForm.js"></script>
+    <script type="text/babel" src="components/CrawlerStatusModal.js"></script>
+    <script type="text/babel" src="components/ApifyCrawlerService.js"></script>
+    
+    <!-- Utility Scripts -->
+    <script type="text/babel" src="components/utils/FileUploadHandler.js"></script>
+    <script type="text/babel" src="components/utils/ValidationUtils.js"></script>
+    <script type="text/babel" src="components/utils/ModalUtils.js"></script>
+    <script type="text/babel" src="components/utils/CrawlerHandler.js"></script>
+    
+    <!-- Form Components -->
+    <script type="text/babel" src="components/FileUploadForm.js"></script>
+    
+    <!-- Page Components -->
+    <script type="text/babel" src="components/SettingsPage.js"></script>
+    <script type="text/babel" src="components/HomePage.js"></script>
+    <script type="text/babel" src="components/ProfilePage.js"></script>
+    <script type="text/babel" src="components/SessionsPage.js"></script>
+    <script type="text/babel" src="components.js"></script>
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>

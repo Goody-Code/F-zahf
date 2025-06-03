@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title || 'أرشيف فيسبوك - نظام إدارة البيانات الشخصية' }}</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="نظام إدارة وأرشفة بيانات فيسبوك الشخصية">
+    <meta name="keywords" content="فيسبوك, أرشيف, بيانات شخصية, عربي">
+    <meta name="author" content="Facebook Archive System">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="أرشيف فيسبوك - نظام إدارة البيانات الشخصية">
+    <meta property="og:description" content="نظام شامل لإدارة وأرشفة بيانات فيسبوك الشخصية">
+    <meta property="og:type" content="website">
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        facebook: '#1877f2',
+                        'facebook-dark': '#166fe5'
+                    }
+                }
+            }
+        }
+    </script>
+</head>

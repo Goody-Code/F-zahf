@@ -1,0 +1,42 @@
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    * {
+        font-family: 'Cairo', 'Amiri', 'Noto Naskh Arabic', Arial, sans-serif !important;
+        direction: rtl !important;
+        text-align: right !important;
+        unicode-bidi: embed !important;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+    
+    .post-card {
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+        background: white !important;
+        box-shadow: none !important;
+    }
+    
+    .profile-header {
+        page-break-inside: avoid;
+        background: #667eea !important;
+    }
+    
+    .stats-card {
+        background: #667eea !important;
+        color: white !important;
+    }
+    
+    /* Remove all gradients and effects for print */
+    * {
+        background-image: none !important;
+        filter: none !important;
+        backdrop-filter: none !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}

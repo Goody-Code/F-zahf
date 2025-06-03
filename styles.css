@@ -1,0 +1,9 @@
+/* Main styles file - imports all CSS modules */
+@import url('./styles/base.css');
+@import url('./styles/components.css');
+@import url('./styles/media.css');
+@import url('./styles/modals.css');
+@import url('./styles/animations.css');
+@import url('./styles/intelligence.css');
+@import url('./styles/pdf.css');
+@import url('./styles/print.css');

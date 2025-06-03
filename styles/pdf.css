@@ -1,0 +1,183 @@
+/* PDF export and processing styles */
+.pdf-processing-modal .modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modern-modal {
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.pdf-content {
+    background: white !important;
+    color: #1a202c !important;
+    font-family: 'Noto Naskh Arabic', 'Amiri', 'Cairo', Arial, sans-serif !important;
+    direction: rtl !important;
+    text-align: right !important;
+    line-height: 1.8 !important;
+    font-size: 14px !important;
+}
+
+.pdf-header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+    color: white !important;
+    padding: 30px !important;
+    border-radius: 15px !important;
+    margin-bottom: 25px !important;
+}
+
+.pdf-section {
+    background: white !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.pdf-stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+    gap: 15px !important;
+    margin: 20px 0 !important;
+}
+
+.pdf-stat-card {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+    color: white !important;
+    padding: 15px !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+}
+
+.pdf-post-card {
+    background: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 15px !important;
+    page-break-inside: avoid !important;
+}
+
+.pdf-media-placeholder {
+    background: #e5e7eb !important;
+    border: 2px dashed #9ca3af !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    text-align: center !important;
+    color: #6b7280 !important;
+}
+
+.pdf-processing-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.processing-details {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.modern-success .modal-content {
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(16, 185, 129, 0.3);
+}
+
+.success-animation {
+    position: relative;
+    display: inline-block;
+}
+
+.success-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: successPulse 2s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+}
+
+.success-details {
+    text-align: right;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(16, 185, 129, 0.3) !important;
+    backdrop-filter: blur(10px);
+}
+
+.modern-error .modal-content {
+    background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(239, 68, 68, 0.3);
+}
+
+.error-animation {
+    position: relative;
+    display: inline-block;
+}
+
+.error-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: errorPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes errorPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+}
+
+.solutions-box {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(59, 130, 246, 0.3) !important;
+    backdrop-filter: blur(10px);
+}
+
+.error-details {
+    font-family: 'Courier New', monospace;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
