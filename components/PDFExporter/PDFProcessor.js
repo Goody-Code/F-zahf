@@ -41,6 +41,37 @@ function PDFProcessor() {
         // Process all images to base64 for offline viewing
         await processImagesInContent(clonedContent);
         
+        // TOC Generation
+        const headings = clonedContent.querySelectorAll('h1, h2, h3');
+        let tocGeneratedHTML = '';
+        if (headings.length > 0) {
+            let tocListHTML = '<ul style="list-style-type: none; padding-right: 0; font-family: \'Noto Naskh Arabic\', sans-serif;">';
+            let headingCounter = 0;
+            headings.forEach(heading => {
+                const text = heading.textContent.trim();
+                if (!text) return; // Skip empty headings
+                let id = heading.id;
+                if (!id) {
+                    id = 'toc-heading-' + headingCounter++;
+                    heading.id = id; // IMPORTANT: Modify the cloned DOM node to add IDs
+                }
+                const tagName = heading.tagName.toLowerCase();
+                let itemStyle = 'margin-bottom: 8px;';
+                if (tagName === 'h1') itemStyle += 'font-size: 1.1em; font-weight: bold;';
+                if (tagName === 'h2') itemStyle += 'margin-right: 20px; font-size: 1em;';
+                if (tagName === 'h3') itemStyle += 'margin-right: 40px; font-size: 0.9em;';
+
+                tocListHTML += `<li style="${itemStyle}"><a href="#${id}" style="text-decoration: none; color: #0056b3;">${text}</a></li>`;
+            });
+            tocListHTML += '</ul>';
+            tocGeneratedHTML = `
+                <div class="toc" dir="rtl" style="padding: 20px; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 30px; page-break-after: always;">
+                    <h2 style="text-align: center; font-family: 'Cairo', sans-serif; color: #333; margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">جدول المحتويات</h2>
+                    ${tocListHTML}
+                </div>
+            `;
+        }
+
         // Create complete HTML document with Arabic support
         const htmlDocument = `
             <!DOCTYPE html>
@@ -52,9 +83,10 @@ function PDFProcessor() {
                 <style>
                     @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
                     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
+                    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
                     
                     * {
-                        font-family: 'Noto Naskh Arabic', 'Cairo', Arial, sans-serif !important;
+                        font-family: 'Noto Naskh Arabic', 'Cairo', 'Amiri', Arial, sans-serif !important;
                         direction: rtl !important;
                         text-align: right !important;
                         unicode-bidi: embed !important;
@@ -190,7 +222,21 @@ function PDFProcessor() {
                     /* Print specific styles */
                     @page {
                         size: A4;
-                        margin: 20mm;
+                        margin: 20mm 15mm 25mm 15mm; /* top, right, bottom, left */
+
+                        @top-center {
+                          content: "${sessionData.name || 'التقرير'}";
+                          font-family: 'Cairo', Arial, sans-serif;
+                          font-size: 10pt;
+                          color: #666;
+                        }
+
+                        @bottom-center {
+                          content: "صفحة " counter(page) " من " counter(pages);
+                          font-family: 'Cairo', Arial, sans-serif;
+                          font-size: 9pt;
+                          color: #666;
+                        }
                     }
                     
                     @media print {
@@ -248,38 +294,35 @@ function PDFProcessor() {
                 </style>
                 
                 <script>
-                    // Auto-print function for PDF generation
                     window.onload = function() {
-                        // Add print button for user convenience
-                        const printButton = document.createElement('button');
-                        printButton.textContent = '🖨️ طباعة أو حفظ كـ PDF';
-                        printButton.style.cssText = `
-                            position: fixed;
-                            top: 20px;
-                            left: 20px;
-                            z-index: 1000;
-                            background: #10b981;
-                            color: white;
-                            border: none;
-                            padding: 15px 25px;
-                            border-radius: 8px;
-                            font-size: 16px;
-                            font-weight: bold;
-                            cursor: pointer;
-                            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-                        `;
-                        printButton.onclick = () => window.print();
-                        document.body.appendChild(printButton);
-                        
-                        // Hide print button when printing
-                        window.addEventListener('beforeprint', () => {
-                            printButton.style.display = 'none';
-                        });
-                        
-                        window.addEventListener('afterprint', () => {
-                            printButton.style.display = 'block';
-                        });
+                        const statusDiv = document.createElement('div');
+                        statusDiv.setAttribute('id', 'printStatusMessage');
+                        statusDiv.style.cssText = 'position:fixed; top:20px; left:20px; padding:15px 25px; background:#007bff; color:white; border-radius:8px; font-size:16px; z-index:10001; box-shadow: 0 4px 12px rgba(0,0,0,0.1);';
+                        statusDiv.textContent = 'جاري تجهيز معاينة الطباعة... الرجاء الانتظار.';
+                        document.body.appendChild(statusDiv);
+
+                        // Give browser a moment to render the message and content fully
+                        setTimeout(() => {
+                            window.print();
+                        }, 500); // Adjust delay as needed
                     };
+
+                    window.addEventListener('afterprint', () => {
+                        const statusDiv = document.getElementById('printStatusMessage');
+                        if (statusDiv) {
+                            statusDiv.textContent = 'اكتملت عملية تجهيز الـ PDF. يمكنك إغلاق هذه النافذة.';
+                            statusDiv.style.background = '#28a745'; // Green for success
+                        }
+                        // Optional: try to close the window, might be blocked by browser
+                        // setTimeout(() => { window.close(); }, 3000);
+                    });
+
+                    window.addEventListener('beforeprint', () => {
+                        const statusDiv = document.getElementById('printStatusMessage');
+                        if (statusDiv) {
+                            statusDiv.style.display = 'none'; // Hide during actual print preview
+                        }
+                    });
                 </script>
             </head>
             <body>
@@ -291,6 +334,7 @@ function PDFProcessor() {
                     <div class="subtitle">طريقة العرض: ${sessionData.displayMode === 'stacked' ? 'عرض متتالي' : 'عرض منفصل'}</div>
                 </div>
                 
+                ${tocGeneratedHTML}
                 ${clonedContent.innerHTML}
                 
                 <div style="margin-top: 50px; text-align: center; color: #6b7280; font-size: 12px; border-top: 2px solid #e5e7eb; padding-top: 20px;">
